@@ -10,7 +10,6 @@ public class Map {
     public static void gameStart() {
         HashMap<String, Integer> gameMap = new HashMap<String, Integer>();
         fillGamers(gameMap);
-        System.out.println("Счет какого игрока хотите узнать:" + "\n");
         System.out.println(getScore(gameMap));
     }
 
@@ -40,6 +39,7 @@ public class Map {
     }
 
     private static String getScore(HashMap map) {
+        System.out.println("Счет какого игрока хотите узнать:");
         int score = -1;
         boolean result = true;
         String name = "";
