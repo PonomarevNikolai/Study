@@ -6,14 +6,14 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Map {
+public class MapClass {
     public static void gameStart() {
-        HashMap<String, Integer> gameMap = new HashMap<String, Integer>();
+        HashMap<User, Integer> gameMap = new HashMap<>();
         fillGamers(gameMap);
         System.out.println(getScore(gameMap));
     }
 
-    private static void fillGamers(HashMap<String, Integer> map) {
+    private static void fillGamers(HashMap<User, Integer> map) {
         Integer gamers = 0;
         String name = "";
         Random random = new Random();
@@ -22,7 +22,7 @@ public class Map {
         for (int i = 0; i < gamers; i++) {
             System.out.println("Введите имя Игрока " + (i + 1) + " :");
             name = getInfo();
-            map.put(name, random.nextInt(10000));
+             map.put(new User(name), random.nextInt(10000));
 
         }
     }
@@ -38,22 +38,21 @@ public class Map {
         return info;
     }
 
-    private static String getScore(HashMap map) {
+    private static String getScore(HashMap<User,Integer> map) {
         System.out.println("Счет какого игрока хотите узнать:");
         int score = -1;
-        boolean result = true;
+        boolean result = false;
         String name = "";
+        name=getInfo();
+        for(User entry: map.keySet()){
+            if(entry.getName().equals(name)){
+                score= map.get(entry);
+                break;
 
-        do {
-            name = getInfo();
-
-            if (map.get(name) != null) {
-                score = (int) map.get(name);
-                result = false;
-            } else {
-                System.out.println("Такого игрока нет, попробуйте еще раз: ");
             }
-        } while (result);
+        }
+
+
         return "\n" + "Результат Игрока " + name + ": " + score + " очков.";
     }
 }
